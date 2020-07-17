@@ -32,26 +32,69 @@ let choices = []
 
 
 function flipCard (eventObject) {
-    if (eventObject.target.classList.contains("kana-game")) {
-    return false;
-    }
+    if (eventObject.target.classList.contains("kana-game")) return;
+    
     if (choices.length === 3) {
-        return;
+        checkForMatch1()
     }
+
     if (lockCards) return;
+
     if (eventObject.target === choices[0]) return;
 console.log(eventObject.target)
+
     eventObject.target.parentElement.classList.add('flip') 
     choices.push(eventObject.target.parentElement)
 
-    // if (!hasFlipped) {
-    //     hasFlipped = true;
-    //     firstCard = this;
-    //     return;
-    // }
+    if (choices.length === 2) {
+        checkForMatch()
+    }
+    if (choices.length === 3) {
+        checkMatch1()
+    }
+
+    //  if (!hasFlipped) {
+    //      hasFlipped = true;
+    //      firstCard = choices[0];
+    //      return;
+    //  }
 }
 
+function checkForMatch () {
+    if (choices[0].dataset.framework === choices[1].dataset.framework) {
+        console.log('the first two match')
+    } else {
+        console.log('they dont match')
+        reflipCards()
+    }
+}
 
+function checkMatch1 () {
+    if (choices[1].dataset.framework === choices[2].dataset.framework) {
+        console.log('All three match!')
+    } else {
+        console.log('They dont match')
+        reflipCards()
+    }
+}
+
+function reflipCards() {
+    lockCards = false;
+    setTimeout( () => {
+        choices[0].classList.remove('flip');
+        choices[1].classList.remove('flip');
+        choices[2].classList.remove('flip')
+        choices = []
+    }, 1500);
+}
+
+// function reflipCards1() {
+//     lockCards = false;
+//     setTimeout( () => {
+//         choices[2].classList.remove('flip');
+//          choices = []
+//     }, 1500)
+// }
 
 // function checkForMatch () {
     // let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
