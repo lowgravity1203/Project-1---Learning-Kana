@@ -25,64 +25,109 @@ console.log('sanity check')
     //reset all cards to faceDown position?
 
 //flip a card when clicked
-const cards = document.querySelectorAll('.mem-cards');
+const cards = document.querySelector(".kana-game");
 let hasFlipped = false;
-let firstCard, secondCard, thirdCard;
+let lockCards = false;
+let choices = []
 
 
-
-
-function flipCard() {
-   this.classList.add('flip');
-
-   if (!hasFlipped) {
-       hasFlipped === true;
-       firstCard === this;
-       return;
-   }
-   secondCard === this;
-   hasFlipped === false;
-
-   checkMatch() 
-
-    thirdCard === this;
-    hasFlipped ===false
-
-    checkMatch1()
-
-function checkMatch () {
-    if (firstCard.dataset.framework === secondCard.dataset.framework) {
-        stickCards();
+function flipCard (eventObject) {
+    if (eventObject.target.classList.contains("kana-game")) {
+    return false;
+    }
+    if (choices.length === 3) {
         return;
     }
-    reflipCards ();
+    if (lockCards) return;
+    if (eventObject.target === choices[0]) return;
+console.log(eventObject.target)
+    eventObject.target.parentElement.classList.add('flip') 
+    choices.push(eventObject.target.parentElement)
+
+    // if (!hasFlipped) {
+    //     hasFlipped = true;
+    //     firstCard = this;
+    //     return;
+    // }
 }
 
-function checkMatch1 () {
-    if (firstCard.dataset.framework && secondCard.dataset.framework === thirdCard.dataset.framework) {
-        stickCards();
+
+
+// function checkForMatch () {
+    // let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
+    // isMatch? disableCards() : 
+// }
+
+
+//problem starts here
+// once the firstCard is turned over we need to make sure we move to second card
+//try making firstCard an empty array?
+
+
+
+
+
+//    secondCard = this;
+
+//    checkMatch() 
+
+//     thirdCard = this;
+//     lockCards = true;
+
+//     checkMatch1()
+
+// function checkMatch () {
+//     console.log(firstCard, secondCard, thirdCard)
+//     if (firstCard.dataset.framework === secondCard.dataset.framework) {
+//         stickCards(firstCard);
+//         stickCards(secondCard);
+//         console.log('working2')
+//         return;
         
-    }
-    reflipCards();
-}
+//     }
+//     reflipCards ();
+    
+// }
 
-function stickCards () {
-    firstCard.removeEventListener('click', flipCard);
-    secondCard.removeEventListener('click', flipCard);
-    thirdCard.removeEventListener('click', flipCard);
-}
+// function checkMatch1 () {
+//     if (firstCard.dataset.framework == secondCard.dataset.framework && secondCard.dataset.framework === thirdCard.dataset.framework) {
+//         stickCards();
+        
+//     }
+//     reflipCards();
+// }
 
-function reflipCards() {
-    setTimeout( () => {
-        firstCard.classList.remove('flip');
-        secondCard.classList.remove('flip');
-        thirdCard.classList.remove('flip');
-    }, 1500);
-}
+// function stickCards (card) {
+//     console.log(card)
+//     card.removeEventListener('click', flipCard);
+// //     secondCard.removeEventListener('click', flipCard);
+// //     thirdCard.removeEventListener('click', flipCard);
+//  }
 
-}
+// function reflipCards() {
+//     lockCards = true;
+//     setTimeout( () => {
+//         firstCard.classList.remove('flip');
+//         secondCard.classList.remove('flip');
+//         thirdCard.classList.remove('flip');
+//         resetCards()
+//     }, 1500);
+// }
 
-cards.forEach(card => card.addEventListener('click', flipCard));
+// function resetCards () {
+//     [hasFlipped, lockCards] = [false,false];
+//     [firstCard, secondCard, thirdCard] = [null, null];
+// }
+// (function shuffle() {
+//     cards.forEach(card => {
+//         let randomShuf = Math.floor(Math.random() * 12);
+//         card.style.order = randomShuf;
+//     });
+// }) ();
+// }
+
+ cards.addEventListener('click', flipCard);
+
 
 
 
