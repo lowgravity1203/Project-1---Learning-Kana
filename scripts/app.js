@@ -27,15 +27,19 @@ function flipCard (eventObject) {
 
 function checkForMatch () {
     console.log('check matchng working')
-    let isMatch = choices[0].dataset.framework === choices[1].dataset.framework &&
-        choices[1].dataset.framework === choices[2].dataset.framework;
-    isMatch? disableCards() : reflipCards()
-    console.log('what is happening')
+
+    if (choices[0].dataset.framework !== choices[1].dataset.framework ||
+        (choices[2] && choices[1].dataset.framework !== choices[2].dataset.framework)) {
+            reflipCards()
+    } else if (choices[2]) {
+        disableCards()
+    }
 }
 
 function disableCards() {
     choices.forEach( (choice) => choice.removeEventListener('click', flipCard))
     console.log('disable cards working')
+    choices = []
 }
 
 
@@ -44,7 +48,6 @@ function reflipCards() {
         choices.forEach( (choice) => {
             console.log('choice working')
             choice.classList.remove('flip')
-            choice.addEventListener('click', flipCard)  
         } )
         console.log('reflip working')
         choices = []
