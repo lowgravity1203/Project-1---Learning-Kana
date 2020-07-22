@@ -7,4 +7,7 @@
   - after the first two cards are matched the player will select a third card. If the third card matches with the first two, all three cards will remain face up and the user will go on to select the next matching three
   - after all cards are matched the cards will flip over to the face down position and shuffle.
   
-  
+- bugs / future goals
+  - still working on a shuffle function that will initiate with the restCards function
+  - instead of hard coding all the cards in HTML create them in the DOM to make the game more dynamic
+  - buuild out the game further to include all 46 hirgana and katakana characters
